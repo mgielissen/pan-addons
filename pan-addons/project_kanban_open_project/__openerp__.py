@@ -14,7 +14,7 @@ Project Kanban Open Project
     'images': [
     ],
     'depends': [
-        'project',
+        'base','project',
     ],
     'data': [
         'view/project_view.xml',

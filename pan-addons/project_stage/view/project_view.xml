@@ -31,13 +31,15 @@
             <field name="model">project.project</field>
             <field name="inherit_id" ref="project.view_project_kanban"/>
             <field name="arch" type="xml">
-                <kanban class="oe_background_grey">
-                    <field name="stage_id"/>
-                    <field name="sequence"/>
-                </kanban>
-                <kanban class="oe_background_grey" position="attributes">
-                    <attribute name="default_group_by">stage_id</attribute>
-                </kanban>
+                <xpath expr="/kanban/templates/t[@t-name='kanban-box']/div/div[@class='oe_kanban_content']/div[@class='oe_kanban_project_avatars']" position="after">
+                    <kanban class="oe_background_grey">
+                        <field name="stage_id"/>
+                        <field name="sequence"/>
+                    </kanban>
+<!--                    <kanban class="oe_background_grey" position="attributes">
+                        <attribute name="default_group_by">stage_id</attribute>
+                    </kanban>-->
+                </xpath>
             </field>
         </record>
 
