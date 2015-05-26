@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	    <record id="view_change_standard_price" model="ir.ui.view">
+            <field name="name">Change Standard Price</field>
+            <field name="model">stock.change.standard.price</field>
+            <field name="arch" type="xml">
+              <form string="Change Standard Price">
+                  <separator string="Change Price"/>
+                  <group>
+                      <field name="new_price" string="Cost Price"/>
+                  </group>
+                  <footer>
+                      <button name="change_price" string="_Apply" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+              </form>
+            </field>
+        </record>
+
+        <record id="action_view_change_standard_price" model="ir.actions.act_window">
+            <field name="name">Change Standard Price</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.change.standard.price</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_change_standard_price"/>
+            <field name="target">new</field>
+        </record>
+	
+		<record id="product_template_form_view_restricted" model="ir.ui.view">
+			<field name="name">product.template.common.form</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="stock_account.view_template_property_form"/>
+			<field name="arch" type="xml">				
+				<xpath expr="//label[@string='Cost Price']" position="replace">
+					<label string="Cost Price" for="standard_price" align="1.0" groups="base.group_erp_manager,purchase.group_purchase_manager"/>
+				</xpath>
+				<xpath expr="//field[@name='standard_price']" position="replace">
+					<field name="standard_price" attrs="{'readonly':['&amp;', ('valuation','=','real_time'), ('cost_method', 'in', ['standard', 'average'])]}" nolabel="1"
+							groups="base.group_erp_manager,purchase.group_purchase_manager"/>
+				</xpath>
+				<xpath expr="//button[@string='- update']" position="replace">					
+					<button name="%(action_view_change_standard_price)d" string="- update"
+                            type="action" attrs="{'invisible':['|', ('valuation','!=', 'real_time'), ('cost_method', 'not in', ['standard', 'average'])]}"
+                            class="oe_link" groups="base.group_erp_manager,purchase.group_purchase_manager"/>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>
