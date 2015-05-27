@@ -33,7 +33,7 @@
                "images/screenshot3.png"],
     "category": "Project Management",
     "complexity": "easy",
-    "depends": ["project"],
+    "depends": ["project","crm"],
     "description": """
 
 A module for companies who like to reference projects by their code.

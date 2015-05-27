@@ -25,6 +25,16 @@
 from openerp.osv import orm, fields
 
 
+class crm_lead(osv.osv):
+    _inherit = "crm.lead"
+    
+    _columns = {
+        'projects_id':fields.many2one('project.project', 'Project'),
+    }
+    
+crm_lead()
+
+
 class project(orm.Model):
     _inherit = "project.project"
 

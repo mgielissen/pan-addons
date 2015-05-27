@@ -3,7 +3,7 @@
     <data>
 
         <!--
-            add project code in project form
+            add project code and potencial in project form
         -->
         <record id="edit_project" model="ir.ui.view">
             <field name="name">project.project.form</field>
@@ -21,6 +21,20 @@
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <newline/>
                     <field name="x_opportunity_id"/>
+                 </xpath>
+            </field>
+        </record>
+        
+        <!--
+            add CRM Lead Form View 
+        -->
+        <record id="edit_project_crm_lead" model="ir.ui.view">
+            <field name="name">crm.lead.inherit.form</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_oppor" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='email_from']" position="before">
+                    <field name="projects_id"/>
                  </xpath>
             </field>
         </record>
