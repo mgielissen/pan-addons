@@ -20,7 +20,7 @@
                 </xpath>
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <newline/>
-                    <field name="x_opportunity"/>
+                    <field name="x_opportunity_id"/>
                  </xpath>
             </field>
         </record>
