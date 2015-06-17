@@ -50,16 +50,16 @@ class sale_order(osv.Model):
         for dat in data[1:]:
             dat.append(ids)
             print '------dat-------------',dat
-            sku = dat[0].strip('')
+            sku = dat[1].strip('')
             prod_id = obj_prod.search(cr,uid,[('default_code','=',sku)])
             if len(prod_id):
                 product= obj_prod.browse(cr,uid,prod_id[0])
                 orderlinevals = {
                 'order_id' : ids,
-                'product_uom_qty' : int(dat[1]),
+                'product_uom_qty' : int(dat[0]),
                 'product_uom' : product.product_tmpl_id.uom_id.id,
-                'price_unit' : float(dat[2]),
-                'name':product.product_tmpl_id.name,
+                'price_unit' : float(dat[3]),
+                'name':dat[2].strip(''),
                 'invoiced' : False,
                 'state' : 'draft',
                 'product_id' : product.id,
