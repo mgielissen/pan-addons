@@ -3,7 +3,7 @@
 <data noupdate="0">
 
    
-    <record id ="group_procurements_tab " model="res.groups">
+    <record id ="group_procurements_tab1" model="res.groups">
         <field name="name">Procurements Tab Users</field>
     </record>
    

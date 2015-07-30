@@ -23,6 +23,18 @@ from openerp.osv import osv, fields
 import logging
 logger = logging.getLogger('lead')
 
+class product_product(osv.osv):
+    _inherit = "product.product"
+    
+    def write(self, cr, uid, ids ,vals, context=None):
+        product_data = self.browse(cr,uid,ids[0])
+        result = super(product_product,self).write(cr, uid, ids, vals, context)
+        
+        return True
+    
+product_product()
+
+
 class crm_lead(osv.osv):
     _inherit = "crm.lead"
     
@@ -96,11 +108,11 @@ class crm_lead(osv.osv):
         logger.error('user_id_after --- crm_lead----  ==== %s', user_id_after)    
         logger.error('user_id_before --- crm_lead----  ==== %s', user_id_before)    
         if  user_id_after and user_id_before:
-            if user_id_before != user_id_after:
+            if int(user_id_before) != int(user_id_after):
     #            logger.error('result --- crm_lead---- result ==== %s', result)
                 sector =''
                 tags = []
-                data_opportunity = user_id_after
+                data_opportunity = user_id_aft
                 ir_mail_server = self.pool.get('ir.mail_server')
                 mail_mail = self.pool.get('mail.mail')
                 all_outemail_ids = ir_mail_server.search(cr,uid,[])

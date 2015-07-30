@@ -28,8 +28,7 @@
     'category': 'Others',
     'summary': 'email sent',
     'depends': [
-        'base','crm','product'
-    ],
+        'base','crm','product','project' ],
     'external_dependencies': {
         'python': [],
     },

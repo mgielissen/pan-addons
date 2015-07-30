@@ -27,6 +27,7 @@ sales_order_states = [
     'progress', 'manual', 'shipping_exept', 'invoice_except', 'done']
 
 quotations_states = ['draft', 'sent', 'waiting_date']
+projects_states = ['template','draft','open','cancelled', 'pending', 'close']
 
 
 class CrmLead(models.Model):
@@ -43,9 +44,14 @@ class CrmLead(models.Model):
             ('partner_id', '=', self.partner_id.id),
             ('state', 'in', quotations_states),
         ])
+        self.projects_count = self.env['project.project'].search_count([
+            ('partner_id', '=', self.partner_id.id),
+            ('state', 'in', projects_states),
+        ])
 
     sales_order_count = fields.Integer(compute='count_sales_order')
     quotations_count = fields.Integer(compute='count_sales_order')
+    projects_count = fields.Integer(compute='count_sales_order')
 
     @api.multi
     def get_sale_order_view(self, order_states, view_title):
@@ -74,6 +80,34 @@ class CrmLead(models.Model):
             res['view_mode'] = 'tree,form'
 
         return res
+    
+    @api.multi
+    def get_projects_view(self, project_states, view_title):
+        partner_ids = [lead.partner_id.id for lead in self]
+
+        projects = self.env['project.project'].search([
+            ('partner_id', 'in', partner_ids),
+            ('state', 'in', project_states),
+        ])
+
+        res = {
+            'name': view_title,
+            'type': 'ir.actions.act_window',
+            'res_model': 'project.project',
+            'view_type': 'form',
+        }
+
+        if len(projects) == 1:
+            res['res_id'] = project[0].id
+            res['view_mode'] = 'form'
+        else:
+            res['domain'] = [
+                ('state', 'in', project_states),
+                ('partner_id', 'in', partner_ids),
+            ]
+            res['view_mode'] = 'tree,form'
+
+        return res
 
     @api.multi
     def button_sales_orders(self):
@@ -82,3 +116,7 @@ class CrmLead(models.Model):
     @api.multi
     def button_quotations(self):
         return self.get_sale_order_view(quotations_states, _('Quotations'))
+    
+    @api.multi
+    def button_projects(self):
+        return self.get_projects_view(projects_states, _('Projects'))

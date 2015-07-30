@@ -28,6 +28,16 @@
                                 icon="fa-strikethrough">
                             <field string="Sales Order" name="sales_order_count" widget="statinfo"/>
                         </button>
+                        <button
+                                class="oe_inline oe_stat_button"
+                                type="object"
+                                context="{
+                                    'default_partner_id': partner_id,
+                                }"
+                                name="button_projects"
+                                icon="fa-files-o">
+                            <field string="Projects" name="projects_count" widget="statinfo"/>
+                        </button>
                     </div>
                 </div>
             </field>
