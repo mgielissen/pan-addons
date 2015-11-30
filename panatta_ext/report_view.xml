@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <report 
+            id="report_presupuesto_completo12"
+            string="Presupuesto Completo"
+            model="sale.order"
+            report_type="qweb-pdf"
+            file="panatta_ext.report_presupuesto_completo" 
+            name="panatta_ext.report_presupuesto_completo" 
+        />
+        
+        <report 
+            id="report_propuesta_pedido12"
+            string="Propuesta Pedido"
+            model="sale.order"
+            report_type="qweb-pdf"
+            file="panatta_ext.report_propuesta_pedido" 
+            name="panatta_ext.report_propuesta_pedido" 
+        />
+        
+    </data>
+</openerp>
+
