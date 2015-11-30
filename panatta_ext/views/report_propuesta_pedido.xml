@@ -2,128 +2,350 @@
 <openerp>
 <data>
 <template id="report_propuesta_pedido_document">
-    <t t-call="report.external_layout">
-        <div class="page">
-            <div class="oe_structure"/>
+  
+    <div class="page">
+        <style>
+        h2   {line-height:110%;font-size:100%; margin-top:0px !important;font-weight:700;}
+        p    {line-height:90%;}
+        p.small {font-size:60%;}
+        p.price {font-size:190%;float:right;}
+        td   {line-height:110%;font-size:80%; border-top:1px solid black !important;
+                padding:15px 15px 0 15px!important;}
+        td.cliente {font-size:100%;}
+        table { margin-bottom: 10px !important; border: 1px solid black; }
+        .condiciones p {font-size:60%; text-align: justify; line-height:120%;}
+        </style>
+        
+        
+        <div class="oe_structure"/>
             <div class="row">
-                <div class="col-xs-6">
-                    <strong t-if="o.partner_shipping_id == o.partner_invoice_id">Invoice and shipping address:</strong>
-                    <strong t-if="o.partner_shipping_id != o.partner_invoice_id">Invoice address:</strong>
-                    <div t-field="o.partner_invoice_id" 
-                        t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'/>
-                    <p t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></p>
-                    <div t-if="o.partner_shipping_id != o.partner_invoice_id" class="mt8">
-                        <strong>Shipping address:</strong>
-                        <div t-field="o.partner_shipping_id" 
-                            t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'/>
-                        <p t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></p>
-                    </div>                        
+            
+                <div class="col-xs-5">
+                <table class="table table-condensed" style="height:150px;">
+                   <tbody>
+                        <tr>
+                            <td>
+                                <img src="/web/binary/company_logo?db=panatta_db&amp;company=1" data-pin-nopin="true" style="width:80px;float:left;margin-top:20px;"/>
+                            </td>
+                            <td style="font-size:90%;">
+                                <p><strong>Panatta Diseño Comercial, SL</strong></p>
+                                <p>Pol. Ind. Juncaril</p>
+                                <p>Huetor Vega, 16</p>
+                                <p>18220 - Albolote</p>
+                                <p>Granada</p>
+                                <p>Tel. 958 468 176</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 </div>
-                <div class="col-xs-5 col-xs-offset-1">
-                    <div t-field="o.partner_id"
-                        t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
+                <div class="col-xs-7">
+                <table class="table table-condensed" style="height:60px;">
+                   <tbody>
+                        <tr>
+                            <td>
+                                <h2 sytle="">PROPUESTA DE PEDIDO</h2>
+                                <p><strong>CÓD.PRESUPUESTO:</strong> <span t-field="o.name"/>
+                                <strong>CÓD.CLIENTE:</strong></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <table class="table table-condensed">
+                   <tbody>
+                        <tr>
+                            <td>
+                                <h2>DESTINO</h2>
+                                <p><strong>NOMBRE:</strong></p>
+                                <p><strong>CÓD.CLIENTE:</strong></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
                 </div>
-            </div>
+            
+        </div>
+        
+        
+        <div class="row">
 
-            <h2>
-                <span t-if="o.state not in ['draft','sent']">Order N° </span>
-                <span t-if="o.state in ['draft','sent']">Quotation N° </span>
-                <span t-field="o.name"/>
-            </h2>
-
-            <div class="row mt32 mb32" id="informations">
-                <div t-if="o.client_order_ref" class="col-xs-3">
-                    <strong>Your Reference:</strong>
-                    <p t-field="o.client_order_ref"/>
-                </div>
-                <div t-if="o.date_order" class="col-xs-3">
-                    <strong t-if="o.state not in ['draft','sent']">Date Ordered:</strong>
-                    <strong t-if="o.state in ['draft','sent']">Quotation Date:</strong>
-                    <p t-field="o.date_order"/>
-                </div>
-                <div t-if="o.user_id.name" class="col-xs-3">
-                    <strong>Salesperson:</strong>
-                    <p t-field="o.user_id.name"/>
-                </div>
-                <div t-if="o.payment_term" class="col-xs-3">
-                    <strong>Payment Term:</strong>
-                    <p t-field="o.payment_term"/>
-                </div>
-            </div>
-
+            <div class="col-xs-12">
             <table class="table table-condensed">
-                <thead>
+               <tbody>
                     <tr>
-                        <th>Description</th>
-                        <th>Taxes</th>
-                        <th class="text-right">Quantity</th>
-                        <th class="text-right">Unit Price</th>
-                        <th groups="sale.group_discount_per_so_line">Disc.(%)</th>
-                        <th class="text-right">Price</th>
+                        <td colspan="5" style="padding:15px 15px 0 15px!important;">
+                            <p><strong>IMPORTE A FACTURAR:</strong></p>
+                        </td>
                     </tr>
-               </thead>
-               <tbody class="sale_tbody">
-                    <tr t-foreach="o.order_line" t-as="l">
-                        <td>
-                           <span t-field="l.name"/>
+                    <tr>
+                        <td style="border:1px solid black;">
+                            <p><strong>PRESUP. APROBADO</strong></p>
                         </td>
-                        <td>
-                            <span t-esc="', '.join(map(lambda x: x.name, l.tax_id))"/>
+
+                        <td style="border:1px solid black;">
+                            <p><strong>IMPUESTO</strong></p>
                         </td>
-                        <td class="text-right">
-                            <span t-field="l.product_uom_qty"/>
-                            <span groups="product.group_uom" t-field="l.product_uom"/>
+
+                        <td style="border:1px solid black;">
+                            <p><strong>TOTAL</strong></p>
                         </td>
-                        <td class="text-right">
-                            <span t-field="l.price_unit"/>
+                    </tr>
+                    <tr>
+                        <td style="border:1px solid black;">
+                            <p class="price" t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
+                            <p></p>
                         </td>
-                        <td groups="sale.group_discount_per_so_line">
-                            <span t-field="l.discount"/>
+                        <td style="border:1px solid black;">
+                            <p class="price" t-field="o.amount_tax" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
+                            <p></p>
                         </td>
-                        <td class="text-right">
-                            <span t-field="l.price_subtotal"
-                                t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                        <td style="border:1px solid black;">
+                            <p class="price" t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
+                            <p></p>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            </div>
+        </div>
+        
+        <!--- FACTURAR A-->
+        <div class="row">
 
-            <div class="row">
-                <div class="col-xs-4 pull-right">
-                    <table class="table table-condensed">
-                        <tr class="border-black">
-                            <td><strong>Total Without Taxes</strong></td>
-                            <td class="text-right">
-                                <span t-field="o.amount_untaxed"
-                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Taxes</td>
-                            <td class="text-right">
-                                <span t-field="o.amount_tax"
-                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
-                            </td>
-                        </tr>
-                        <tr class="border-black">
-                            <td><strong>Total</strong></td>
-                            <td class="text-right">
-                                <span t-field="o.amount_total"
-                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+            <div class="col-xs-12">
+            <table class="table table-condensed" style="height:110px;">
+               <tbody>
+                    <tr>
+                        <td>
+                            <p><strong>FACTURAR A:</strong></p>
+                            
+                        </td>
+                        <td class="cliente">
+                            <div t-field="o.partner_invoice_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+                            
+                        </td>
+                        <td class="cliente">
+                            <div t-field="o.partner_invoice_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;phone&quot;, &quot;fax&quot;], &quot;no_marker&quot;: true}"/>
+                            <p t-if="o.partner_id.vat">CIF: <span t-field="o.partner_id.vat"/></p>
+                            <div t-if="o.partner_shipping_id != o.partner_invoice_id" class="mt8">
+                                <strong>Shipping address:</strong>
+                                <div t-field="o.partner_shipping_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;, &quot;fax&quot;], &quot;no_marker&quot;: true}"/>
+                                <p t-if="o.partner_id.vat">CIF: <span t-field="o.partner_id.vat"/></p>
+                            </div>                        
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <!--- /// FACTURAR A-->
+        
+        
+        <!--- FORMA PAGO-->
+        <div class="row">
+
+            <div class="col-xs-12">
+            <table class="table table-condensed" style="height:200px;">
+               <tbody>
+                    <tr>
+                        <td>
+                            <p><strong>FORMA DE PAGO:</strong></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        
+        <div class="row">
+
+            <div class="col-xs-12">
+            <table class="table table-condensed">
+               <tbody>
+                    <tr>
+                        <td colspan="2" class="text-center" style="border:1px solid black;">
+                            <p><strong>FIRMA DEL PEDIDO</strong></p>
+                        </td>
+                        <td colspan="2" class="text-center" style="border:1px solid black;">
+                            <p><strong>SALIDA FÁBRICA</strong></p>
+                        </td>
+                        <td colspan="2" class="text-center" style="border:1px solid black;">
+                            <p><strong>FIN DE INSTALACIÓN</strong></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border:1px solid black;"><p></p><p></p></td>
+                        <td style="border:1px solid black;"><p>Importe:</p><p></p></td>
+                        <td style="border:1px solid black;"><p></p><p></p></td>
+                        <td style="border:1px solid black;"><p>Importe:</p><p></p></td>
+                        <td style="border:1px solid black;"><p></p><p></p></td>
+                        <td style="border:1px solid black;"><p>Importe:</p><p></p></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>        
+        <!--- /// FORMA PAGO-->
+        
+        <!--- ESPECIFICACIONES -->
+        <div class="row">
+
+            <div class="col-xs-12">
+            <table class="table table-condensed" style="height:160px;">
+               <tbody>
+                    <tr>
+                        <td>
+                            <p><strong>ESPECIFICACIONES MATERIAL:</strong></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <!--- /// ESPECIFICACIONES -->
+        
+        <!--- ESPECIFICACIONES -->
+        <div class="row">
+
+            <div class="col-xs-6">
+            <table class="table table-condensed" style="height:150px;">
+               <tbody>
+                    <tr>
+                        <td>
+                            <p><strong>CONFORME CLIENTE</strong></p>
+                            <p>NOMBRE:</p>
+                            <p>DNI:</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             </div>
 
-            <p t-field="o.note" />
-            <p t-if="o.payment_term.note">
-                <strong>Payment Term:</strong>
-                <span t-field="o.payment_term.note"/>
-            </p>
+            <div class="col-xs-6">
+            <table class="table table-condensed" style="height:150px;">
+               <tbody>
+                    <tr>
+                        <td>
+                            <p><strong>Aceptación del Pedido por:</strong> <span t-field="o.user_id.name"/></p>
+                            <p t-field="o.write_date" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <!--- /// ESPECIFICACIONES -->
+        
+        <p class="small">Nota: Esta propuesta no será considerada en firme hasta que no haya sido aceptada por Panatta Diseño Comercial, SL.</p>
+        <p class="small">PANATTA DISEÑO COMERCIAL, S.L.  Inscrita en el Registro Mercantil de Granada, Inscripción 1ª, tomo 1.479, libro 0, folio 62, Sección 8, Hoja GR 42521· C.I.F.: B-19.509.710</p>
+            
+            <p style="page-break-before:always;"> </p>
+            <h1 class="text-center" style="font-size:90%;" >CONDICIONES DE VENTA</h1>
+            
+            <div class="row condiciones">
+                <div class="col-xs-4">
+<p>1. 	PREAMBULO</p>
+<p>1.1 	Las presentes Condiciones Generales de Venta, así como las restantes particulares pactadas entre PANATTA DISEÑO COMERCIAL, S.L. y el Comprador, serán de aplicación, sin perjuicio de las modificaciones o exclusiones que las dos partes deseen introducir, que deberán ser objeto de acuerdo expreso y escrito.</p>
+<p></p>
+<p>2. 	FORMALIZACIÓN DE PEDIDO</p>
+<p>2.1 	Todo Intermediario, para tener tal consideración, deberá recibir la correspondiente credencial PANATTA DISEÑO COMERCIAL, S.L., mediante la firma de  un documento de acuerdo, denominado PACTO DE CONDICIONES, sin cuyo requisito no podrá suministrársele mercancía alguna.</p>
+<p></p>
+<p>2.2 	La compraventa no quedará perfeccionada hasta tanto no sea aceptada 	por PANATTA DISEÑO COMERCIAL, S.L. Esta aceptación se formalizará expresamente  mediante la firma, por parte de PANATTA DISEÑO COMERCIAL, S.L. sobre la misma Propuesta de Pedido y en la casilla destinada a este efecto. Una copia de la Propuesta de Pedido, debidamente aceptada, será remitida al Comprador.</p>
+<p></p>
+<p>2.3 	Si una vez aceptada la Propuesta de Pedido por PANATTA DISEÑO COMERCIAL, S.L., el Comprador, unilateralmente y sin justa causa, la cancelase, éste se obliga a abonar a PANATTA DISEÑO COMERCIAL, S.L., el 25% del valor del pedido en concepto de indemnización por daños y perjuicios.</p>
+<p></p>
+<p>3. 	DOCUMENTACION</p>
+<p>3.1 	La información dada por PANATTA DISEÑO COMERCIAL, S.L., en catálogos, prospectos  y tarifas es meramente orientativa. PANATTA DISEÑO COMERCIAL, S.L., se reserva el derecho a modificar, sin previo aviso, disposiciones, forma, dimensiones, pesos, capacidades, rendimiento, material de los aparatos, máquinas, elementos y demás características que figuren grabados y descritos en sus impresos y otros documentos facilitados con anterioridad.</p>
+<p></p>
+<p>3.2 	Los documentos de carácter técnico, planos y proyectos, así como las ofertas facilitadas son de exclusiva propiedad de PANATTA DISEÑO COMERCIAL, S.L., y deben ser devueltos a petición de la misma, no pudiendo ser entregados, ni divulgados, realizados, ni simplemente utilizados por  el Comprador sin la autorización expresa y escrita de PANATTA DISEÑO COMERCIAL, S.L.</p>
+<p></p>
+<p>4. 	ENTREGA DE MATERIALES</p>
+<p>4.1 	La entrega de materiales se ajustará a lo pactado en esta Propuesta de Pedido, debidamente aceptada por PANATTA DISEÑO COMERCIAL, S.L.</p>
+<p></p>
+<p>4.2 	La entrega será efectuada por simple aviso de PANATTA DISEÑO COMERCIAL, S.L., al Comprador de quedar a su disposición las mercancías; por envío directo al Comprador o por entrega de PANATTA DISEÑO COMERCIAL, S.L., en su fábrica o almacenes a un comisionado o transportista designado por el propio Comprador o, a falta de tal designación, elegido PANATTA DISEÑO COMERCIAL, S.L.</p>
+<p></p>
+<p>4.3 	Si la entrega de mercancía o puesta en marcha de la instalación se demorase por causas ajenas a PANATTA DISEÑO COMERCIAL, S.L., el Comprador se obliga a cumplir lo pactado en lo que afecta al resto del contenido de  la Propuesta de Pedido y, particularmente, en lo referente a la instrumentación del pago, sirviendo de base, para el cómputo de plazos, la fecha inserta en la casilla “Fecha de puesta en marcha” y quince días más.</p>
+<p></p>
+<p>5. 	EMBALAJES, TRANSPORTES Y SEGUROS</p>
+<p>5.1 	Los distintos tipos de embalajes serán de cuenta y cargo de PANATTA DISEÑO COMERCIAL, S.L., o Comprador, según se determine en las correspondientes Condiciones de Venta o Tarifa de Precios de PANATTA DISEÑO COMERCIAL, S.L.</p>
+<p>5.2 	La mercancía viaja siempre por cuenta y riesgo del Comprador, por ello, los gastos de transporte, seguros, descarga, acarreo, manutención, puesta a pie de obra, colocación “in situ”, etc., son a cargo y responsabilidad del Comprador a quien corresponde comprobar y revisar los materiales en el momento de su recepción y ejercer, si hubiera lugar 	a ello, las acciones reclamaciones y recursos contra los transportistas por los daños que se hubieran producido, incluso si los envíos han sido efectuados franco destino.</p>
+<p></p>
+<p>5.3 	Todos los daños o desperfectos observados por el Comprador a la recepción de los materiales se harán constar por aquél en la Nota de Entrega cuando el envío se realiza por camión expresamente contratado, o en el Albarán de Entrega, cuando se realiza por Agencia, documentos que el Comprador debe firmar a la recepción de la mercancía y ser devueltos a PANATTA DISEÑO COMERCIAL, S.L.</p>
+<p></p>
+<p>6. 	PLAZOS DE ENTREGA</p>
+<p>6.1	Los plazos para la entrega de mercancía se fijarán de mutuo acuerdo en la Propuesta de Pedido y empezarán a contar, caso de no ser fechas fijas, a partir de la fecha de aceptación del pedido por PANATTA DISEÑO COMERCIAL, S.L.</p>
+<p></p>
+<p>6.2	PANATTA DISEÑO COMERCIAL, S.L. quedará liberado de todo compromiso, en cuanto 	a plazos de entrega, en los siguientes casos:</p>
+                </div>
+                
+                <div class="col-xs-4">
+<p>	1.- Cuando las condiciones de pago no hayan sido cumplidas por el Comprador.</p>
+<p>	2.- Si el Comprador solicita modificaciones a lo convenido, no facilita los datos e información necesarios para iniciar la fabricación, no obtención de permisos, etc., en el tiempo hábil.</p>
+<p>	3.- Si en las fechas fijadas para la entrega de la mercancía, los locales donde debería instalarse no se hallasen dispuestos para recibirla.</p>
+<p>	4.- Por el retraso en la entrega de materiales, suministros o ejecución de trabajos a efectuar por el comprador u otros industriales por él  contratados para la misma obra.</p>
+
+<p></p>
+<p>	5.- En caso de fuerza mayor o sucesos tales como lockout, huelga, epidemia, guerra, requisa, incendio, inundaciones, interrupción o retraso 	en transportes, dificultades sobre las importaciones incluidas en la venta o por cualquier otra causa que represente para total o parcia para PANATTA DISEÑO COMERCIAL, S.L., o sus suministradores.</p>
+<p></p>
+<p>6.3	En cualquiera de los casos anteriores, la demora que por ello pudiera producirse no constituirá de ningún modo, causa de anulación de la venta, de penalización de los plazos de pago.</p>
+<p></p>
+<p>7.	PRECIOS</p>
+<p>7.1	Se aplicarán los acordados entre Comprador e PANATTA DISEÑO COMERCIAL, S.L., en las condiciones particulares de la venta.</p>
+<p></p>
+<p>8.	CONDICIONES DE PAGO</p>
+<p>8.1	Se determinarán de mutuo acuerdo por el Comprador e PANATTA DISEÑO COMERCIAL, S.L., en las condiciones particulares de la venta.</p>
+<p></p>
+<p>8.2	En los casos en que se establezcan condiciones de pago a plazos PANATTA DISEÑO COMERCIAL, S.L., y el Comprador se ajustarán a las disposiciones legales que se hallen en vigor al respecto y suscribirán la documentación correspondiente en la forma y según los modelos oficiales previstos por las mismas. La formalización de contrato oficial de ventas a plazos se efectuará como más tarde, a la entrega de la mercancía.</p>
+<p></p>
+<p>8.3	Cualquier retraso o aplazamiento de todos o parte de los pagos pactados en la Propuesta de Pedido y aceptados por PANATTA DISEÑO COMERCIAL, S.L., supondrá para el Comprador la obligación de pagar los gastos bancarios e intereses de demora correspondientes, al tipo vigente de mercado en el momento del incumplimiento.</p>
+<p></p>
+<p>8.4	Si se produjese el impago de cualquiera de los plazos pactados en las condiciones de la propuesta de pedido, se anularán la totalidad de los descuentos aplicados al precio final convenido, incluidos los costes de transporte y montaje, caso de haber asumidos previamente por PANATTA DISEÑO COMERCIAL, S.L., lo que facultará a esta última para reclamar por la vía que considere oportuna, tano las cantidades impagadas, como los decuentos anulados y gastos de transporte, montaje o de cualquier otra índole que hayan sido causados por la operación. En el caso de que el presupuesto aceptado fuera a precios netos, la cantidad reclamada sería según tarifa vigente.</p>
+<p></p>
+<p>8.5	PANATTA DISEÑO COMERCIAL, S.L., se reserva expresamente el dominio de la mercancía hasta el momento en que resulte totalmente pagado su precio total. En consecuencia, el comprador no adquiere la propiedad de la misma, quedando en su poder, a título de simple depósito, o pudiéndola ceder, vender, enajenar, gravar, hipotecar o darla en garantía de ninguna clase, ya sea independiente, ya formando parte del inmueble o del activo del negocio.</p>
+<p></p>
+<p>9.	MONTAJES</p>
+<p>9.1	El montaje de los muebles vendidos, salvo acuerdo escrito en contrario, será por cuenta y a cargo del Comprador.</p>
+<p></p>
+<p>9.2	Cuando el montaje estuviere incluido en el precio de Venta, se determinarán en un anexo a la Propuesta de Pedido, y firmado por las	dos Partes, los conceptos incluidos en dicho precio tanto por estudios y materiales como por obras a realizar.</p>
+<p></p>
+<p>9.3	El Comprador se obliga a facilitar a PANATTA DISEÑO COMERCIAL, S.L., todos los medios auxiliares necesarios para los montajes cuando los mismos tuvieran que realizarse por PANATTA DISEÑO COMERCIAL, S.L.</p>
+<p></p>
+<p>9.4	En caso de accidentes, la responsabilidad de PANATTA DISEÑO COMERCIAL, S.L., se halla estrictamente limitada a su personal.</p>
+<p></p>
+<p>10.	GARANTÍA</p>
+<p>10.1	Toda la mercancía objeto de la venta está garantizada, y sólo al primer 	usuario, por un periodo de 6 meses a partir de la fecha de puesta enmarcha.</p>
+<p>10.2	La garantía se limitará a la simple sustitución de las piezas reconocidas como defectuosas por los servicios técnicos de PANATTA DISEÑO COMERCIAL, S.L., quedando en propiedad del mismo las piezas reemplazadas, siendo, por tanto a cargo del Comprador el resto de gasto como mano de obra, viajes y dietas de personal empleado por PANATTA DISEÑO COMERCIAL, S.L.</p>
+<p></p>                    
+                </div>
+                
+                <div class="col-xs-4">
+
+<p>10.3	PANATTA DISEÑO COMERCIAL, S.L., no asume, bajo ningún concepto, otras responsabilidades derivadas de esta compraventa que las ya contempladas en los apartados 10.1 y 10.2, quedando, por tanto, expresamente exonerada de las responsabilidades derivadas de los daños directos o indirectos a personas o cosas; las indemnizaciones por pérdida del género y beneficios; los daños y perjuicios por el tiempo que medie entre el aviso de la avería y la reparación de la misma; y todas las demás causas que pudieran surgir.</p>
+<p></p>
+<p>11.	SINIESTROS</p>
+<p>11.1	En casos de siniestros, cualquiera que sea la causa que lo haya motivado, PANATTA DISEÑO COMERCIAL, S.L., se reserva el derecho de ser pagado en preferencia por las cantidades que le faltasen por cobrar, con cargo a la indemnización pagada o por pagar por la o las Compañías de Seguros afectadas.</p>
+<p></p>
+<p>12.	IMPUESTOS</p>
+<p>12.1	Todos los impuestos, tributos, arbitrios, tasa y gastos de visados existentes en la actualidad, o que en el futuro puedan existir, y que graven la formalización y cumplimiento de la operación de venta, la entrega de materiales, puesta en marcha, existencia o funcionamiento 	de las máquinas o instalación, así como sus pruebas y dictámenes oficiales, serán de la exclusiva cuenta y cargo del Comprador.</p>
+<p></p>
+<p>13.	JUZGADOS Y TRIBUNALES</p>
+<p>13.1 	Para la resolución de todas las cuestiones que puedan suscitarse, relacionadas con la operación de compraventa y las consecuencias de la misma, así como sobre la interpretación y cumplimiento de las presentes Condiciones Generales de Venta, el Comprador, con renuncia de fuero y domicilio propio, se somete expresamente a los Juzgados y Tribunales de la jurisdicción del domicilio de PANATTA DISEÑO COMERCIAL, S.L., exceptuándose aquellos casos en que las disposiciones legales, vigentes en cada momento, impongan, con carácter obligatorio, la competencia de otros Juzgados o Tribunales.</p>
+<p></p>
+<p></p>
+<p><strong>CONFORME CLIENTE</strong></p>
+<p>NOMBRE:</p>
+<p>DNI:</p>
+</div>
+            
+            </div>
+            
+            
+            
             <div class="oe_structure"/>
         </div>
-    </t>
 </template>
 
 <template id="report_propuesta_pedido">
