@@ -63,7 +63,7 @@ class sale_order(osv.Model):
                 'invoiced' : False,
                 'state' : 'draft',
                 'product_id' : product.id,
-#                'tax_id' : [],
+                'tax_id' : 'IVA 21%',
                 }
                 get_lineid = saleorderline_obj.search(cr,uid,[('product_id','=', product.id),('order_id','=', ids)])
                 if not get_lineid: 

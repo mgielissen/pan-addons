@@ -27,7 +27,7 @@ class product_product(osv.osv):
     _inherit = "product.product"
     
     def write(self, cr, uid, ids ,vals, context=None):
-        product_data = self.browse(cr,uid,ids[0])
+        #product_data = self.browse(cr,uid,ids[0])
         result = super(product_product,self).write(cr, uid, ids, vals, context)
         
         return True
