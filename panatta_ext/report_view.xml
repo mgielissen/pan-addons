@@ -12,6 +12,15 @@
         />
         
         <report 
+            id="report_presupuesto_completo_sinv12"
+            string="Presupuesto Completo sin Valorar"
+            model="sale.order"
+            report_type="qweb-pdf"
+            file="panatta_ext.report_presupuesto_completo_sinv" 
+            name="panatta_ext.report_presupuesto_completo_sinv" 
+        />
+        
+        <report 
             id="report_propuesta_pedido12"
             string="Propuesta Pedido"
             model="sale.order"

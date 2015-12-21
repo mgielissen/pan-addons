@@ -2,241 +2,241 @@
 <openerp>
 <data>
 <template id="report_propuesta_pedido_document">
-  
-    <div class="page">
-        <style>
-        h2   {line-height:110%;font-size:100%; margin-top:0px !important;font-weight:700;}
-        p    {line-height:90%;}
-        p.small {font-size:60%;}
-        p.price {font-size:190%;float:right;}
-        td   {line-height:110%;font-size:80%; border-top:1px solid black !important;
-                padding:15px 15px 0 15px!important;}
-        td.cliente {font-size:100%;}
-        table { margin-bottom: 10px !important; border: 1px solid black; }
-        .condiciones p {font-size:60%; text-align: justify; line-height:120%;}
-        </style>
-        
-        
-        <div class="oe_structure"/>
-            <div class="row">
-            
-                <div class="col-xs-5">
-                <table class="table table-condensed" style="height:150px;">
-                   <tbody>
-                        <tr>
-                            <td>
-                                <img src="/web/binary/company_logo?db=panatta_db&amp;company=1" data-pin-nopin="true" style="width:80px;float:left;margin-top:20px;"/>
-                            </td>
-                            <td style="font-size:90%;">
-                                <p><strong>Panatta Diseño Comercial, SL</strong></p>
-                                <p>Pol. Ind. Juncaril</p>
-                                <p>Huetor Vega, 16</p>
-                                <p>18220 - Albolote</p>
-                                <p>Granada</p>
-                                <p>Tel. 958 468 176</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                </div>
-                <div class="col-xs-7">
-                <table class="table table-condensed" style="height:60px;">
-                   <tbody>
-                        <tr>
-                            <td>
-                                <h2 sytle="">PROPUESTA DE PEDIDO</h2>
-                                <p><strong>CÓD.PRESUPUESTO:</strong> <span t-field="o.name"/>
-                                <strong>CÓD.CLIENTE:</strong></p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <table class="table table-condensed">
-                   <tbody>
-                        <tr>
-                            <td>
-                                <h2>DESTINO</h2>
-                                <p><strong>NOMBRE:</strong></p>
-                                <p><strong>CÓD.CLIENTE:</strong></p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                </div>
-            
-        </div>
-        
-        
+
+<div class="page">
+    <style>
+    h2   {line-height:110%;font-size:100%; margin-top:0px !important;font-weight:700;}
+    p    {line-height:90%;}
+    p.small {font-size:60%;}
+    p.price {font-size:190%;float:right;}
+    td   {line-height:110%;font-size:80%; border-top:1px solid black !important;
+            padding:15px 15px 0 15px!important;}
+    td.cliente {font-size:100%;}
+    table { margin-bottom: 10px !important; border: 1px solid black; }
+    .condiciones p {font-size:60%; text-align: justify; line-height:120%;}
+    </style>
+
+
+    <div class="oe_structure"/>
         <div class="row">
 
-            <div class="col-xs-12">
-            <table class="table table-condensed">
+            <div class="col-xs-5">
+            <table class="table table-condensed" style="height:150px;">
                <tbody>
                     <tr>
-                        <td colspan="5" style="padding:15px 15px 0 15px!important;">
-                            <p><strong>IMPORTE A FACTURAR:</strong></p>
+                        <td>
+                            <img src="/web/binary/company_logo?db=panatta_db&amp;company=1" data-pin-nopin="true" style="width:80px;float:left;margin-top:20px;"/>
                         </td>
-                    </tr>
-                    <tr>
-                        <td style="border:1px solid black;">
-                            <p><strong>PRESUP. APROBADO</strong></p>
-                        </td>
-
-                        <td style="border:1px solid black;">
-                            <p><strong>IMPUESTO</strong></p>
-                        </td>
-
-                        <td style="border:1px solid black;">
-                            <p><strong>TOTAL</strong></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="border:1px solid black;">
-                            <p class="price" t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
-                            <p></p>
-                        </td>
-                        <td style="border:1px solid black;">
-                            <p class="price" t-field="o.amount_tax" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
-                            <p></p>
-                        </td>
-                        <td style="border:1px solid black;">
-                            <p class="price" t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
-                            <p></p>
+                        <td style="font-size:90%;">
+                            <p><strong>Panatta Diseño Comercial, SL</strong></p>
+                            <p>Pol. Ind. Juncaril</p>
+                            <p>Huetor Vega, 16</p>
+                            <p>18220 - Albolote</p>
+                            <p>Granada</p>
+                            <p>Tel. 958 468 176</p>
                         </td>
                     </tr>
                 </tbody>
             </table>
             </div>
-        </div>
-        
-        <!--- FACTURAR A-->
-        <div class="row">
-
-            <div class="col-xs-12">
-            <table class="table table-condensed" style="height:110px;">
+            <div class="col-xs-7">
+            <table class="table table-condensed" style="height:60px;">
                <tbody>
                     <tr>
                         <td>
-                            <p><strong>FACTURAR A:</strong></p>
-                            
+                            <h2 sytle="">PROPUESTA DE PEDIDO</h2>
+                            <p><strong>CÓD.PRESUPUESTO:</strong> <span t-field="o.name"/>
+                            <strong>CÓD.CLIENTE:</strong></p>
                         </td>
-                        <td class="cliente">
-                            <div t-field="o.partner_invoice_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
-                            
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-condensed">
+               <tbody>
+                    <tr>
+                        <td>
+                            <h2>DESTINO</h2>
+                            <p><strong>NOMBRE:</strong></p>
+                            <p><strong>CÓD.CLIENTE:</strong></p>
                         </td>
-                        <td class="cliente">
-                            <div t-field="o.partner_invoice_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;phone&quot;, &quot;fax&quot;], &quot;no_marker&quot;: true}"/>
+                    </tr>
+                </tbody>
+            </table>
+
+            </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-xs-12">
+        <table class="table table-condensed">
+           <tbody>
+                <tr>
+                    <td colspan="5" style="padding:15px 15px 0 15px!important;">
+                        <p><strong>IMPORTE A FACTURAR:</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black;">
+                        <p><strong>PRESUP. APROBADO</strong></p>
+                    </td>
+
+                    <td style="border:1px solid black;">
+                        <p><strong>IMPUESTO</strong></p>
+                    </td>
+
+                    <td style="border:1px solid black;">
+                        <p><strong>TOTAL</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black;">
+                        <p class="price" t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
+                        <p></p>
+                    </td>
+                    <td style="border:1px solid black;">
+                        <p class="price" t-field="o.amount_tax" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
+                        <p></p>
+                    </td>
+                    <td style="border:1px solid black;">
+                        <p class="price" t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
+                        <p></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <!--- FACTURAR A-->
+    <div class="row">
+
+        <div class="col-xs-12">
+        <table class="table table-condensed" style="height:110px;">
+           <tbody>
+                <tr>
+                    <td>
+                        <p><strong>FACTURAR A:</strong></p>
+
+                    </td>
+                    <td class="cliente">
+                        <div t-field="o.partner_invoice_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+
+                    </td>
+                    <td class="cliente">
+                        <div t-field="o.partner_invoice_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;phone&quot;, &quot;fax&quot;], &quot;no_marker&quot;: true}"/>
+                        <p t-if="o.partner_id.vat">CIF: <span t-field="o.partner_id.vat"/></p>
+                        <div t-if="o.partner_shipping_id != o.partner_invoice_id" class="mt8">
+                            <strong>Shipping address:</strong>
+                            <div t-field="o.partner_shipping_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;, &quot;fax&quot;], &quot;no_marker&quot;: true}"/>
                             <p t-if="o.partner_id.vat">CIF: <span t-field="o.partner_id.vat"/></p>
-                            <div t-if="o.partner_shipping_id != o.partner_invoice_id" class="mt8">
-                                <strong>Shipping address:</strong>
-                                <div t-field="o.partner_shipping_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;, &quot;fax&quot;], &quot;no_marker&quot;: true}"/>
-                                <p t-if="o.partner_id.vat">CIF: <span t-field="o.partner_id.vat"/></p>
-                            </div>                        
-                            
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
+                        </div>                        
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         </div>
-        <!--- /// FACTURAR A-->
-        
-        
-        <!--- FORMA PAGO-->
-        <div class="row">
+    </div>
+    <!--- /// FACTURAR A-->
 
-            <div class="col-xs-12">
-            <table class="table table-condensed" style="height:200px;">
-               <tbody>
-                    <tr>
-                        <td>
-                            <p><strong>FORMA DE PAGO:</strong></p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
+
+    <!--- FORMA PAGO-->
+    <div class="row">
+
+        <div class="col-xs-12">
+        <table class="table table-condensed" style="height:200px;">
+           <tbody>
+                <tr>
+                    <td>
+                        <p><strong>FORMA DE PAGO:</strong></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         </div>
-        
-        <div class="row">
+    </div>
 
-            <div class="col-xs-12">
-            <table class="table table-condensed">
-               <tbody>
-                    <tr>
-                        <td colspan="2" class="text-center" style="border:1px solid black;">
-                            <p><strong>FIRMA DEL PEDIDO</strong></p>
-                        </td>
-                        <td colspan="2" class="text-center" style="border:1px solid black;">
-                            <p><strong>SALIDA FÁBRICA</strong></p>
-                        </td>
-                        <td colspan="2" class="text-center" style="border:1px solid black;">
-                            <p><strong>FIN DE INSTALACIÓN</strong></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="border:1px solid black;"><p></p><p></p></td>
-                        <td style="border:1px solid black;"><p>Importe:</p><p></p></td>
-                        <td style="border:1px solid black;"><p></p><p></p></td>
-                        <td style="border:1px solid black;"><p>Importe:</p><p></p></td>
-                        <td style="border:1px solid black;"><p></p><p></p></td>
-                        <td style="border:1px solid black;"><p>Importe:</p><p></p></td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-        </div>        
-        <!--- /// FORMA PAGO-->
-        
-        <!--- ESPECIFICACIONES -->
-        <div class="row">
+    <div class="row">
 
-            <div class="col-xs-12">
-            <table class="table table-condensed" style="height:160px;">
-               <tbody>
-                    <tr>
-                        <td>
-                            <p><strong>ESPECIFICACIONES MATERIAL:</strong></p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
+        <div class="col-xs-12">
+        <table class="table table-condensed">
+           <tbody>
+                <tr>
+                    <td colspan="2" class="text-center" style="border:1px solid black;">
+                        <p><strong>FIRMA DEL PEDIDO</strong></p>
+                    </td>
+                    <td colspan="2" class="text-center" style="border:1px solid black;">
+                        <p><strong>SALIDA FÁBRICA</strong></p>
+                    </td>
+                    <td colspan="2" class="text-center" style="border:1px solid black;">
+                        <p><strong>FIN DE INSTALACIÓN</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid black;"><p></p><p></p></td>
+                    <td style="border:1px solid black;"><p>Importe:</p><p></p></td>
+                    <td style="border:1px solid black;"><p></p><p></p></td>
+                    <td style="border:1px solid black;"><p>Importe:</p><p></p></td>
+                    <td style="border:1px solid black;"><p></p><p></p></td>
+                    <td style="border:1px solid black;"><p>Importe:</p><p></p></td>
+                </tr>
+            </tbody>
+        </table>
         </div>
-        <!--- /// ESPECIFICACIONES -->
-        
-        <!--- ESPECIFICACIONES -->
-        <div class="row">
+    </div>        
+    <!--- /// FORMA PAGO-->
 
-            <div class="col-xs-6">
-            <table class="table table-condensed" style="height:150px;">
-               <tbody>
-                    <tr>
-                        <td>
-                            <p><strong>CONFORME CLIENTE</strong></p>
-                            <p>NOMBRE:</p>
-                            <p>DNI:</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
+    <!--- ESPECIFICACIONES -->
+    <div class="row">
 
-            <div class="col-xs-6">
-            <table class="table table-condensed" style="height:150px;">
-               <tbody>
-                    <tr>
-                        <td>
-                            <p><strong>Aceptación del Pedido por:</strong> <span t-field="o.user_id.name"/></p>
-                            <p t-field="o.write_date" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
+        <div class="col-xs-12">
+        <table class="table table-condensed" style="height:160px;">
+           <tbody>
+                <tr>
+                    <td>
+                        <p><strong>ESPECIFICACIONES MATERIAL:</strong></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         </div>
+    </div>
+    <!--- /// ESPECIFICACIONES -->
+
+    <!--- ESPECIFICACIONES -->
+    <div class="row">
+
+        <div class="col-xs-6">
+        <table class="table table-condensed" style="height:150px;">
+           <tbody>
+                <tr>
+                    <td>
+                        <p><strong>CONFORME CLIENTE</strong></p>
+                        <p>NOMBRE:</p>
+                        <p>DNI:</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="col-xs-6">
+        <table class="table table-condensed" style="height:150px;">
+           <tbody>
+                <tr>
+                    <td>
+                        <p><strong>Aceptación del Pedido por:</strong> <span t-field="o.user_id.name"/></p>
+                        <p t-field="o.write_date" t-field-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
         <!--- /// ESPECIFICACIONES -->
         
         <p class="small">Nota: Esta propuesta no será considerada en firme hasta que no haya sido aceptada por Panatta Diseño Comercial, SL.</p>
